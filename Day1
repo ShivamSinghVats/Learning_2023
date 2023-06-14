@@ -1,3 +1,5 @@
+// Day 1
+
 #include<stdio.h>
 #include<conio.h>
 int main()
@@ -14,4 +16,16 @@ int main()
     return 0;
 }
 
-// Day 1
+// Using ternary operator
+
+int main()
+{
+    int a, b, biggest;
+    printf("Enter any two numbers: ");
+    scanf("%d%d", &a, &b);
+    biggest = (num1>num2) ? num1 : num2;
+    printf("\nLargest = %d", biggest);
+    getch();
+    return 0;
+}
+
