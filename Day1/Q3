@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+    int rl,phy,che,mat,total;
+    float per;
+    char nm[20],div[10];
+    printf("Input the Roll Number of the student :");
+    scanf("%d",&rl);
+    printf("Input the Name of the Student :");
+    scanf("%s",nm);
+    printf("Input  the marks of Physics, Chemistry and Maths : ");
+    scanf("%d%d%d",&phy,&che,&mat);
+    total = phy+che+mat;
+    per = total/3.0;
+
+       printf("\nRoll No : %d\nName of Student : %s\n",rl,nm);
+       printf("Marks in Physics : %d\nMarks in Chemistry : %d\nMarks in Maths : %d\n",phy,che,mat);
+       printf("Total Marks = %d\nPercentage = %5.2f\n",total,per);
+       }
