@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+ 
+#define SIZE (1 << 16)
+ 
+ 
+#define GROUP_A(x) x, x + 1, x + 1, x + 2
+ 
+ 
+#define GROUP_B(x)                                         
+    GROUP_A(x), GROUP_A(x + 1), GROUP_A(x + 1),            
+        GROUP_A(x + 2)
+ 
+
+ 
+#define GROUP_C(x)                                         
+    GROUP_B(x), GROUP_B(x + 1), GROUP_B(x + 1),            
+        GROUP_B(x + 2)
+ 
+ 
+#define META_LOOK_UP(PARAMETER)                            
+    GROUP_##PARAMETER(0), GROUP_##PARAMETER(1),            
+        GROUP_##PARAMETER(1), GROUP_##PARAMETER(2)
+ 
+int countSetBits(int array[], size_t array_size)
+{
+    int count = 0;
+ 
+
+    static unsigned char const look_up[]
+        = { META_LOOK_UP(C) };
+ 
+
+    unsigned char* pData = NULL;
+ 
+    for (size_t index = 0; index < array_size; index++) 
+    {
+ 
+        pData = (unsigned char*)&array[index];
+ 
+
+        count += look_up[pData[0]];
+        count += look_up[pData[1]];
+        count += look_up[pData[2]];
+        count += look_up[pData[3]];
+    }
+ 
+    return count;
+}
+ 
+
+int main()
+{
+    int index;
+    int random[SIZE];
+ 
+    srand((unsigned)time(0));
+ 
+    for (index = 0; index < SIZE; index++) {
+        random[index] = rand();
+    }
+ 
+    printf("Total number of bits = %d\n",
+           countSetBits(random, SIZE));
+    return 0;
+}
