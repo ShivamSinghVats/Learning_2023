@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main() {
+  double x = 0.7;
+  int exponent;
+
+  // Get the exponent of the double variable
+  exponent = *((int *)&x) & 0x7FF;
+
+  // Print the exponent in hexadecimal format
+  printf("Exponent in hexadecimal format: 0x%X\n", exponent);
+
+  // Convert the exponent to binary format
+  int binaryExponent = 0;
+  for (int i = 0; i < 8; i++) {
+    binaryExponent = binaryExponent * 2 + (exponent & 1);
+    exponent >>= 1;
+  }
+
+  // Print the exponent in binary format
+  printf("Exponent in binary format: 0b%d\n", binaryExponent);
+
+  return 0;
+}
