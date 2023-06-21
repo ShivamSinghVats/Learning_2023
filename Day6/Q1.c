@@ -1,52 +1,35 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Student {
-  int rollno;
-  char name[20];
-  float marks;
+struct word {
+  char *word;
+  int length;
 };
 
-void parse_string(char *string, struct Student *students, int n) {
-  int i;
-  for (i = 0; i < n; i++) {
-    // Split the string into three parts: roll number, name, and marks.
-    char *token1, *token2, *token3;
-    token1 = strtok(string, " ");
-    token2 = strtok(NULL, " ");
-    token3 = strtok(NULL, " ");
+int parse_string(char *string, struct word *words, int max_words) {
+  int i = 0;
+  char *token;
 
-    // Convert the roll number to an integer.
-    students[i].rollno = atoi(token1);
-
-    // Copy the name into the structure.
-    strcpy(students[i].name, token2);
-
-    // Convert the marks to a float.
-    students[i].marks = atof(token3);
+  token = strtok(string, " ");
+  while (token != NULL && i < max_words) {
+    words[i].word = token;
+    words[i].length = strlen(token);
+    i++;
+    token = strtok(NULL, " ");
   }
+
+  return i;
 }
 
 int main() {
-  int n;
-  char string[100];
-  struct Student students[10];
+  char *string = "This is a test string.";
+  struct word words[10];
+  int number_of_words;
 
-  // Get the number of inputs from the user.
-  printf("Enter the number of inputs: ");
-  scanf("%d", &n);
+  number_of_words = parse_string(string, words, 10);
 
-  // Get the input string from the user.
-  printf("Enter the input string: ");
-  scanf("%s", string);
-
-  // Parse the string and initialize the array of structures.
-  parse_string(string, students, n);
-
-  // Print the array of structures.
-  for (int i = 0; i < n; i++) {
-    printf("Student %d: rollno = %d, name = %s, marks = %.2f\n", i + 1,
-           students[i].rollno, students[i].name, students[i].marks);
+  for (int i = 0; i < number_of_words; i++) {
+    printf("Word: %s, Length: %d\n", words[i].word, words[i].length);
   }
 
   return 0;
