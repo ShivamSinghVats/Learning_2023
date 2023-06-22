@@ -1,6 +1,9 @@
-void initialize_structures(struct word *words, int number_of_words) {
-  for (int i = 0; i < number_of_words; i++) {
-    words[i].word = malloc(words[i].length + 1);
-    memset(words[i].word, 0, words[i].length + 1);
+void initialize_students(struct Student *students, int n) {
+  int i;
+
+  for (i = 0; i < n; i++) {
+    students[i].rollno = 0;
+    strcpy(students[i].name, "");
+    students[i].marks = 0.0;
   }
 }
